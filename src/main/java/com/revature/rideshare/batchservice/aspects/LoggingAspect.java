@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -117,12 +115,9 @@ public class LoggingAspect {
 	private String getPayload() {
 		if (request == null) return "";
 		StringBuilder builder = new StringBuilder();
-		ServletInputStream stream = null;
 		BufferedReader reader = null;
 		try {
-			stream = request.getInputStream();
-			//Spring uses the reader elsewhere so we have to do a deep copy to not block it
-			reader = new BufferedReader(new InputStreamReader(stream));
+			reader = request.getReader();
 			String line;
 			while ((line = reader.readLine()) != null) {
 				builder.append(line);
