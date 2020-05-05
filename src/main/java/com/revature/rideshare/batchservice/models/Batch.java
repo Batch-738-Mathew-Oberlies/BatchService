@@ -15,7 +15,6 @@ import java.io.Serializable;
  * Batch class that represents a user's batch. All batches have a batch number and a location.
  *
  * @author Adonis Cabreja
- *
  */
 
 @Component
